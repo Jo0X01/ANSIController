@@ -1,0 +1,83 @@
+{
+    "BEL" :{
+        "escape": "\\a",
+        "Ctrl+key": "^G",
+        "Hex": "\\x07",
+        "Octal": "\\007",
+        "Decimal": "\\7",
+        "EN-Description": "Terminal bell",
+        "AR-Description": "جرس"
+    },
+    "BS" :{
+        "escape": "\\b",
+        "Ctrl+key": "^H",
+        "Hex": "\\x08",
+        "Octal": "\\010",
+        "Decimal": "\\8",
+        "EN-Description": "Backspace",
+        "AR-Description": "مسافة للخلف"
+    },
+    "HT" :{
+        "escape": "\\t",
+        "Ctrl+key": "^I",
+        "Hex": "\\x08",
+        "Octal": "\\010",
+        "Decimal": "\\8",
+        "EN-Description": "Horizontal TAB",
+        "AR-Description": "مساحة أفقية"
+    },
+    "LF" :{
+        "escape": "\\n",
+        "Ctrl+key": "^J",
+        "Hex": "\\x0A",
+        "Octal": "\\012",
+        "Decimal": "\\10",
+        "EN-Description": "Linefeed (newline)",
+        "AR-Description": "تغذية السطر (سطر جديد)"
+    },
+    "VT": {
+        "escape": "\\v",
+        "Ctrl+key": "^K",
+        "Hex": "\\x0B",
+        "Octal": "\\013",
+        "Decimal": "\\11",
+        "EN-Description": "Vertical TAB",
+        "AR-Description": "مساحة رأسية"
+    },
+    "FF" :{
+        "escape": "\\f",
+        "Ctrl+key": "^L",
+        "Hex": "\\x0C",
+        "Octal": "\\014",
+        "Decimal": "\\12",
+        "EN-Description": "Formfeed (also: New page NP)",
+        "AR-Description": "لم افهم"
+    },
+    "CR" :{
+        "escape": "\\r",
+        "Ctrl+key": "^M",
+        "Hex": "\\x0D",
+        "Octal": "\\015",
+        "Decimal": "\\13",
+        "EN-Description": "Carriage return",
+        "AR-Description": "حذف ما قبلها"
+    },
+    "ESC":{
+        "escape": "\\e",
+        "Ctrl+key": "^[",
+        "Hex": "\\x0B",
+        "Octal": "\\033",
+        "Decimal": "\\27",
+        "EN-Description": "Escape character",
+        "AR-Description": "هروب الحرف"
+    },
+    "DEL" :{
+        "escape": null,
+        "Ctrl+key": null,
+        "Hex": "\\x7F",
+        "Octal": "\\177",
+        "Decimal": "\\127",
+        "EN-Description": "delete control character. When printed or displayed, this character does not produce any visible output but is often used for various control functions in older systems.",
+        "AR-Description": "حذف عنصر التحكم. عند الطباعة أو العرض ، لا ينتج عن هذا الحرف أي إخراج مرئي ولكنه غالبًا ما يستخدم لوظائف التحكم المختلفة في الأنظمة القديمة."
+    }
+}
