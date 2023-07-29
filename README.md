@@ -16,7 +16,7 @@ if u face any issue write it
 <br>
 
 [![PyPi](https://img.shields.io/badge/-PyPi-blue.svg?logo=pypi&labelColor=555555&style=for-the-badge)](https://pypi.org/project/yt-dlp "PyPi") [![License: license](https://img.shields.io/badge/-license-blue.svg?style=for-the-badge)](LICENSE "License")
-[![Some: python](More Info About ANSI Escape Codes `https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797#escape`)](B "Ansi")
+More Info About ANSI Escape Codes `https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797#escape`
 ## Features
 ------------------------------
 `ANSI Controller` Features:
