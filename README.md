@@ -84,6 +84,10 @@ ____________
 ```shell
 python -m ANSIController
 ```
+> OR
+```shell
+ansicontroller
+```
 > Python Code
  ``` python
 from ANSIController import Terminal  # Import Needed Class
