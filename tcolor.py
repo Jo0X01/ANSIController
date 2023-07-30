@@ -55,6 +55,7 @@ class _Colors:
         for _s in self._COLORS:
             self.__strings.extend(_s.chars)
         self.__strings.reverse()
+        self._colors = self.__strings
     def __color(self,char:str) -> _Color|None:
         for c in self._COLORS:
             if c.is_that_color(char):

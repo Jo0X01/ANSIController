@@ -9,7 +9,7 @@ License: MIT License
 from time import sleep
 import keyboard
 from ANSIController.const import _256_FG,_256_BG,_1ATTR, _RESET, _print
-from ANSIController.controls import _ColorsControls, _CursorControls
+from ANSIController import _ColorsControls, _CursorControls
 from ANSIController.tparser import _PARSER
 
 

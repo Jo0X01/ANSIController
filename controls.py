@@ -120,17 +120,21 @@ class _ColorsControls:
     def __replace(self,texts:list[str]) -> list[tuple]:
         data = []
         for text in texts:
-            if text in ['[z]','[Z]','[0]','[reset]','[Reset]']:
-                data.append((text,0,0))
+            if _PARSER._isKnown(text):
+                if text in ['[z]','[Z]','[0]','[reset]','[Reset]']:
+                    data.append((text,0,0))
+                else:
+                    t,style = _PARSER._extract_style(text)
+                    color = _PARSER._extract_color(t,any(char in "xX" for char in text))
+                    data.append((text,style,color))
             else:
-                t,style = _PARSER._extract_style(text)
-                color = _PARSER._extract_color(t,any(char in "xX" for char in text))
-                data.append((text,style,color))
+                data.append(text)
         return data
     def __swap(self,text:str,texts) -> str:
         texts = self.__replace(texts)
         for t in texts:
-            text = text.replace(t[0],self.__get_colors_escape(t[1],t[2]))
+            if isinstance(t,tuple):
+                text = text.replace(t[0],self.__get_colors_escape(t[1],t[2]))
         return text
 
     def colorize(self,text:str,sep:str="[]") -> str:
