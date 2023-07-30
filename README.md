@@ -39,8 +39,13 @@ if u face any issue write it
 
 `ANSI Controller` requires [pip](https://pypi.org/) to install.
 Install the dependencies and devDependencies and start the script.
+### Windows
 ```bash
 pip install ANSIController
+```
+### Linux && Termux
+```bash
+pip3 install ANSIController
 ```
 # Table of colors & style
 - #### if terminal not support colorize the string will just remove from string
@@ -81,8 +86,17 @@ pip install ANSIController
 ## Examples & Usage
 ____________
 > Terminal Execute
+### windows
 ```shell
 python -m ANSIController
+```
+> OR
+```shell
+ansicontroller
+```
+### Linux && Termux
+```shell
+python3 -m ANSIController
 ```
 > OR
 ```shell
