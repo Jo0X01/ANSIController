@@ -56,32 +56,32 @@ pip3 install ANSIController
 - #### Background--: `X,x`
 - #### Reset-------: `Z,0,reset,Reset`
 - #### Colors:
-    - [+] `black:`\t            `b,black,30`
-    - [+] `red:`\t              `r,red,31`
-    - [+] `green:`\t            `g,green,32`
-    - [+] `yellow:`\t           `y,yellow,33`
-    - [+] `blue:`\t             `l,blue,34`
-    - [+] `magenta:`\t          `m,magenta,35`
-    - [+] `cyan:`\t             `c,cyan,36`
-    - [+] `white:`\t            `w,white,37`
-    - [+] `default:`\t          `d,default,39`
-    - [+] `bright black:`\t     `bb,bblack,90`
-    - [+] `bright red:`\t       `br,bred,91`
-    - [+] `bright green:`\t     `bg,bgreen,92`
-    - [+] `bright yellow:`\t    `by,byellow,93`
-    - [+] `bright blue:`\t      `bl,bblue,94`
-    - [+] `bright magenta`\t    `bm,bmagenta,95`
-    - [+] `bright cyan:`\t      `bc,bcyan,96`
-    - [+] `bright white:`\t     `bw,bwhite,97`
+    - [+] `black:`              `b,black,30`
+    - [+] `red:`                `r,red,31`
+    - [+] `green:`              `g,green,32`
+    - [+] `yellow:`             `y,yellow,33`
+    - [+] `blue:`               `l,blue,34`
+    - [+] `magenta:`            `m,magenta,35`
+    - [+] `cyan:`               `c,cyan,36`
+    - [+] `white:`              `w,white,37`
+    - [+] `default:`            `d,default,39`
+    - [+] `bright black:`       `bb,bblack,90`
+    - [+] `bright red:`         `br,bred,91`
+    - [+] `bright green:`       `bg,bgreen,92`
+    - [+] `bright yellow:`      `by,byellow,93`
+    - [+] `bright blue:`        `bl,bblue,94`
+    - [+] `bright magenta`      `bm,bmagenta,95`
+    - [+] `bright cyan:`        `bc,bcyan,96`
+    - [+] `bright white:`       `bw,bwhite,97`
 - #### Styles:
-    - [+] `bold:`\t             `B,bold,1`
-    - [+] `dim:`\t              `D,dim,2`
-    - [+] `italic:`\t           `I,italic,3`
-    - [+] `underline:`\t        `U,underline,4`
-    - [+] `blinking:`\t         `L,blinking,5`
-    - [+] `reverse:`\t          `R,reverse,7`
-    - [+] `hidden:`\t           `H,hidden,8`
-    - [+] `strikethrough:`\t    `S,strikethrough,9`
+    - [+] `bold:`               `B,bold,1`
+    - [+] `dim:`                `D,dim,2`
+    - [+] `italic:`             `I,italic,3`
+    - [+] `underline:`          `U,underline,4`
+    - [+] `blinking:`           `L,blinking,5`
+    - [+] `reverse:`            `R,reverse,7`
+    - [+] `hidden:`             `H,hidden,8`
+    - [+] `strikethrough:`      `S,strikethrough,9`
 
 ## Examples & Usage
 ____________
