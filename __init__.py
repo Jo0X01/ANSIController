@@ -1,8 +1,11 @@
-## more info `https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797#escape`
-
-__author__ = 'JoOx01'
-__desc__ = """Basic Python Module to control & color & style text in terminal"""
-import sys
+#!/usr/bin/env python3
+#!/data/data/com.termux/files/usr/bin/env python3
+"""
+Basic Python Module to control & color & style text in terminal.
+Author: JoOx01
+Date: 2023-07-30
+License: MIT License
+"""
 from time import sleep
 import keyboard
 from ANSIController.const import _256_FG,_256_BG,_1ATTR, _RESET, _print
@@ -23,7 +26,7 @@ class Terminal(_CursorControls,_ColorsControls):
     def game(row:int=40,col:int=40,move_steps:int=1):
         control = Terminal()
         for r in range(row):
-            print("|"+'-'*col)
+            print("|"+'-'*col+"|")
         while True:
             try:
                 if keyboard.is_pressed('up'):
@@ -88,64 +91,3 @@ class Terminal(_CursorControls,_ColorsControls):
         Terminal.print_colors()
         Terminal.print_id_colors()
         Terminal.print_colors_styles()
-
-def main():
-    t = Terminal()
-    while True:
-        _print(f"""-----------------------
-{t.get_color('green',5)}{__desc__}{t.get_reset()}
------------------------{t.get_color('yellow',5)}
-╔═══╦═╗░╔╦═══╦══╦══╗
-║╔═╗║║╚╗║║╔═╗╠╣╠╩╣╠╝
-║║░║║╔╗╚╝║╚══╗║║░║║░
-║╚═╝║║╚╗║╠══╗║║║░║║░
-║╔═╗║║░║║║╚═╝╠╣╠╦╣╠╗
-╚╝░╚╩╝░╚═╩═══╩══╩══╝{t.get_reset()}
------------------------
-by {t.get_color('red',1)}{__author__}{t.get_reset()}
------------------------
-[1] Print ALL Colors
-[2] Print ALL Styles
-[3] Colors With Styles
-[4] Print All
-[5] X O   # soon 
-[6] Snake # soon
-[7] Move Game
-[8] Colorize Text
-[9] Clear Screen
-[-1] End
------------------------
->>> 
------------------------""")
-        t.force_move_to_up()
-        t.move_to_left(50)
-        # t.move_to_up(start_line=True)
-        choice = str(input(">>> "))
-        if choice == "1":
-            t.print_colors()
-            input()
-        if choice == "2":
-            t.print_styles()
-            input()
-        if choice == "3":
-            t.print_colors_styles()
-            input()
-        if choice == "4":
-            t.print_test()
-            input()
-        if choice == "7":
-            t.game(100,100,2)
-        if choice == "8":
-            text = str(input("Text `[your_color_code]`: "))
-            t.print_colorize(text)
-            input()
-        if choice == "9":
-            t.clear_screen()
-        if choice == '-1':
-            _print("Thx For Using Bye\n")
-            break
-if __name__ == '__main__':
-    try:
-        main()
-    except:
-        pass
