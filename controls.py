@@ -120,13 +120,12 @@ class _ColorsControls:
     def __replace(self,texts:list[str]) -> list[tuple]:
         data = []
         for text in texts:
-            if _PARSER._isKnown(text):
-                if text in ['[z]','[Z]','[0]','[reset]','[Reset]']:
-                    data.append((text,0,0))
-                else:
-                    t,style = _PARSER._extract_style(text)
-                    color = _PARSER._extract_color(t,any(char in "xX" for char in text))
-                    data.append((text,style,color))
+            if text in ['[z]','[Z]','[0]','[reset]','[Reset]']:
+                data.append((text,0,0))
+            elif _PARSER._isKnown(text):
+                t,style = _PARSER._extract_style(text)
+                color = _PARSER._extract_color(t,any(char in "xX" for char in text))
+                data.append((text,style,color))
             else:
                 data.append(text)
         return data

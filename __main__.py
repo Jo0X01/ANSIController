@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 #!/data/data/com.termux/files/usr/bin/env python3
-from const import _print
-from ANSIController import Terminal
+from ANSIController import Terminal,_print
 
 ## more info `https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797#escape`
 
