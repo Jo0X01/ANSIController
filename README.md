@@ -386,6 +386,8 @@ terminal_control.print_progress()
 terminal_control.is_progress_finish("progress_key")
 terminal_control.is_progress_finish(all=True)
 ```
+## Output:
+![ProgressBar GIF](https://raw.githubusercontent.com/Jo0X01/ANSIController/main/tests/test_progress.gif)
 ## Ref
 ________________
 - https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797#escape
