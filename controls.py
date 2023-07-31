@@ -40,8 +40,11 @@ class _CursorControls:
     def move_to_right(self, steps: int = 1):
         "moves cursor right {steps} lines"
         self.__parse_escape(f"{steps}C")
-    def force_move_to_up(self):
-        self.__parse_default("M")
+    def force_move_to_up(self,steps:int=1,clear=False):
+        for _ in range(steps):
+            self.__parse_default("M")
+            if clear:
+                self.clear_line()
 
     def save_cursor_postion(self):
         self.__parse_default("7")
@@ -86,6 +89,10 @@ class _CursorControls:
         self.__parse_escape("J")  # 0J
     def clear_line(self):
         self.__parse_escape("2K\r") # type: ignore
+    def clear_up_lines(self,steps:int=1):
+        self.save_cursor_postion()
+        self.force_move_to_up(steps,clear=True)
+        self.restor_cursor_postion()
 
 class _ColorsControls:
     def __init__(self) -> None:
@@ -133,7 +140,7 @@ class _ColorsControls:
         texts = self.__replace(texts)
         for t in texts:
             if isinstance(t,tuple):
-                text = text.replace(t[0],self.__get_colors_escape(t[1],t[2]))
+                text = text.replace(t[0],self.__get_colors_escape(t[1],t[2]),1)
         return text
 
     def colorize(self,text:str,sep:str="[]") -> str:
@@ -202,7 +209,15 @@ class _ColorsControls:
         fsep = re.escape(fsep)
         esep = re.escape(esep)
         text = _convert_hex_colors(text)
-        return self.__swap(text,re.compile(rf"({fsep}.*?{esep})").findall(text))
+        _re = fr"{fsep}[^{fsep}{esep}].*?{esep}"
+        _found = re.compile(rf"({_re})").findall(text)
+        _manual_replacment = []
+        for r in _found:
+            if '/' in r:
+                _found.remove(r)
+                _manual_replacment.append(r)
+        for m in _manual_replacment:
+            text = text.replace(m,m.replace('/',''))
+        return self.__swap(text,_found)
     def print_colorize(self,text:str,sep:str="[]") -> None:
         _print(self.colorize(text,sep))
-

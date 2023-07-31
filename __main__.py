@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 #!/data/data/com.termux/files/usr/bin/env python3
+from time import sleep
 from ANSIController import Terminal,_print
 
 ## more info `https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797#escape`
@@ -32,6 +33,7 @@ by {t.get_color('red',1)}{__author__}{t.get_reset()}
 [8] Move Game
 [9] Colorize Text
 [10] Clear Screen
+[11] Progress
 [-1] End
 -----------------------
 >>> 
@@ -64,6 +66,28 @@ by {t.get_color('red',1)}{__author__}{t.get_reset()}
             input()
         if choice == "10":
             t.clear_screen()
+        if choice == "11":
+            t.move_to_down(1)
+            max_value = int(input("Max Value: "))
+            increase = int(input("Increase Value: "))
+            texts = []
+            c = 1
+            _print("[Rules] %c% current , %m% max , %p% percent , %b% bar\n")
+            while True:
+                txt = str(input(f"Text Progress Line ({c}) [-1 To End] : "))
+                if txt == "-1":
+                    break
+                texts.append(txt)
+                c+=1
+            t.add_progress(texts,max_value,increase)
+            while not t.is_progress_finish():
+                t.increase_progress(all=True)
+                c = 0
+                for text in texts:
+                    t.set_progress_inc_value(10+c,c,False)
+                    c+=1
+                t.print_progress()
+                sleep(.2)
         if choice == '-1':
             t.clear_line()
             _print("\nThx For Using Bye\n")
