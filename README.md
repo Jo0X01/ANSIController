@@ -41,22 +41,24 @@ if u face any issue write it
 [![PyPi](https://img.shields.io/badge/-PyPi-blue.svg?logo=pypi&labelColor=555555&style=for-the-badge)](https://pypi.org/project/ANSIController "PyPi") [![License: license](https://img.shields.io/badge/-license-blue.svg?style=for-the-badge)](LICENSE "License")
 
 [More Info About ANSI Escape Codes](`https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797#escape`)
+
+## Tool Snap
+_______________
+![Alt Text](https://raw.githubusercontent.com/Jo0X01/ANSIController/main/tests/tool.png)
+
 ## Features
 ------------------------------
 `ANSI Controller` Features:
 - Move Cursor Right or left or top or down or postion in terminal screen
 - Colorize any text u want in terminal
 - Change Style of terminal printing text , bold ,italic , etc...
-
+- MultiProgress in same time
 ## Tech
 ------------------------------
-
-[More Info About ANSI Escape Codes](`https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797#escape`)
 `ANSI Controller` uses a number of open source projects to work properly:
 - [keyboard] - pypi module `https://pypi.org/project/keyboard/`
-- And of course `ANSI Controller` itself is open source.
- on GitHub.
-
+- `ANSI Controller` itself is open source on GitHub.
+- `More Info About ANSI Escape Codes: `https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797#escape
 ## Installation
 ------------------------------
 
@@ -105,7 +107,18 @@ pip3 install ANSIController
     - [+] `reverse:`            `R,reverse,7`
     - [+] `hidden:`             `H,hidden,8`
     - [+] `strikethrough:`      `S,strikethrough,9`
-
+- #### ProgressBar: add `%{char}%`
+    - [+] `c:`                  `current progress value`
+    - [+] `m:`                  `max progress value`
+    - [+] `p:`                  `percent progress value`
+    - [+] `b:`                  `bar progress value`
+    - [+] `f:`                  `print full bar with all info`
+    - [+] `your_custom_key:`    `your_custom_value`
+- #### More Control in ProgressBar:
+    - [+] `txt:`                `key of string value inside`
+    - [+] `mx:`                 `max value default is 100`
+    - [+] `inc:`                `increamnt value defualt is 1`
+    - [+] `custom:`             `dict object with custom keys`
 ## Examples & Usage
 ____________
 > Terminal Execute
@@ -145,6 +158,10 @@ Terminal.print_test()
 # Try it
 Terminal.game()
 ```
+## Output:
+![Alt Text](https://raw.githubusercontent.com/Jo0X01/ANSIController/main/tests/test_styles.png)
+![Alt Text](https://raw.githubusercontent.com/Jo0X01/ANSIController/main/tests/test_colors.png)
+![Alt Text](https://raw.githubusercontent.com/Jo0X01/ANSIController/main/tests/test_ids.png)
 ### to move cursor
 ```python
 # this will make cursor move to up 3 lines
@@ -221,6 +238,8 @@ colorize_texts_using_color_char = [
 for text in colorize_texts_using_color_char:
     print(terminal_control.colorize(text,sep))
 ```
+## Output:
+![Alt Text](https://raw.githubusercontent.com/Jo0X01/ANSIController/main/tests/test_colors_out.png)
 > Now Using style only
 > 
 ```python
@@ -238,6 +257,8 @@ colorize_texts_using_style_char = [
 for text in colorize_texts_using_style_char:
     print(terminal_control.colorize(text,sep))
 ```
+## Output:
+![Alt Text](https://raw.githubusercontent.com/Jo0X01/ANSIController/main/tests/test_styles_out.png)
 > Now Using Colors & style
 > 
 ```python
@@ -255,12 +276,119 @@ colorize_texts_using_style_color_char = [
 for text in colorize_texts_using_style_color_char:
     print(terminal_control.colorize(text,sep))
 ```
+## Output:
+![Alt Text](https://raw.githubusercontent.com/Jo0X01/ANSIController/main/tests/test_colors_style_out.png)
 > To add Background  just add `X,x` to the block `[xrB]` i want background red and bold style
 > 
 > Note: you can use `terminal_control.print_colorize` without print
 > 
 > `[0],[z],[Z],[Reset]` is to reset to default color&style in terminal
+> 
+> 
+### - Using multiprogressbar
+```python
+# add_progress: take list of text
+# take too dict
+#example with list
+terminal_control.add_progress([
+    "[rB]test1[0]",
+    "[w]test2[0]",
+    "[cI]test3[0]",
+    "[yD]test4[0]",
+])
+# example with dict
+# take `progress_name`` to access later
+# `txt` key is the progress text
+terminal_control.add_progress({
+    "progress1":{"txt": "[rB]test1[0]"},
+    "progress2":{"txt": "[w]test2[0]"},
+    "progress3":{"txt": "[cI]test3[0]"},
+    "progress4":{"txt": "[yD]test4[0]"},
+})
+# now if i want to add progress value and update values
+#example with list
+# access by index
+terminal_control.add_progress([
+    "[rB]test1: (%c%/%m%)[0]",
+    "[w]test2: %b% (%c%/%m%)[0]",
+    "[cI]test3: %b% %p% (%c%/%m%)[0]",
+    "[yD]test4: %f% [0]",
+])
+#example with more control dict
+terminal_control.add_progress({
+    "progress1":{
+        "txt": "[rB]test1: (%c%/%m%) - (%key1%,%key2%,%status_test%)[0]",
+        "mx":200,
+        "inc":5,
+        "custom":{
+            "key1":10,
+            "key2":"test",
+            "status_test":"Good"
+        }
+    },
+    # sometimes no need for `mx` or `inc`
+    "progress2":{
+        "txt": "[w]test2: %b% (%c%/%m%)- (%key1%,%key2%)[0]",
+        "custom":{
+            "key1":10,
+            "key2":"test",
+            "status_test":"Good"
+        }
+    }
+})
 
+#----------------------------------------
+# now to update progress bar values
+
+# progress_key = `if list will be index`
+# progress_key = `if dict will be name`
+# `all` argument mean if u want to change in all texts
+# default of all is False
+
+# to change max value of custom texts
+terminal_control.set_progress_max_value(150,"progress_key")
+terminal_control.set_progress_max_value(150,all=True)
+
+# to change auto increment value of custom texts
+terminal_control.set_progress_inc_value(5,"progress_key")
+terminal_control.set_progress_inc_value(5,all=True)
+
+# to change text value of custom texts
+terminal_control.set_progress_text("[rD]This is Text[0]","progress_key")
+terminal_control.set_progress_text("[rD]This is Text[0]",all=True)
+
+# to change or add custom value of custom texts
+terminal_control.set_custom_value("key1","value1","progress_key")
+terminal_control.set_custom_value("key1","value1",all=True)
+
+#----------------------------------------
+# now to update progress value
+
+# this function more control in update
+terminal_control.update(
+    value = 13, # if no progress value, leave it
+    progress_key="progress_key", # if no all, leave it
+    all=True or False,
+    custom_values={
+        "key1":"value1",
+        "key2":"value2"
+    }
+)
+# if u want to auto update using `inc` value just call this
+terminal_control.increase_progress("progress_key")
+terminal_control.increase_progress(all=True)
+
+#----------------------------------------
+# now to print & check progress value
+# to print all progress text with colorize mode
+terminal_control.print_progress()
+# to check is progress finish or not
+terminal_control.is_progress_finish("progress_key")
+terminal_control.is_progress_finish(all=True)
+```
+## Ref
+________________
+- https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797#escape
 ________________
 ## Tests
 * ✅ `Windows 11 & 10 & 7`
