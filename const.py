@@ -1,6 +1,8 @@
 
 # escape char in dfrnt numbers system
+import random
 import re
+import string
 from sys import stdout
 
 
@@ -12,7 +14,7 @@ _HEX = "\x1b"
 _DEC = "\27"
 
 # constant vars to use escape chars
-_ESC = _OCT or _HEX or _DEC
+_ESC = _HEX or _OCT or _DEC
 _DEFAULT        = f"{_ESC}{{}}"
 _EARSE          = f"{_ESC}[{{}}"
 _1ATTR          = f"{_ESC}[{{s}}m"
@@ -25,7 +27,7 @@ _256_FG         = f"{_ESC}[38;5;{{id}}m"
 _RESET          = f"{_ESC}[0m"
 
 # pattern regex
-_255Pattern = r"?:25[0-5]|2[0-4]\d|[01]?\d{1,2}"
+_255Pattern = r"\b(?:25[0-5]|2[0-4]\d|[01]?\d\d?)\b" or r"?:25[0-5]|2[0-4]\d|[01]?\d{1,2}"
 # colors and modes terminal
 _STYLES_CODES = [
     # code , reset code , mode name , mode chars
@@ -72,3 +74,18 @@ def _convert_hex_colors(text:str) -> str:
         r,g,b = hex_to_rgb(hex)
         text = text.replace(hex,f"({r},{g},{b})")
     return text
+def _convert_time(sec: int, format: str = "h:m:s") -> str:
+    sec = int(sec)
+    hours = sec // 3600
+    remaining_seconds = sec % 3600
+    minutes = remaining_seconds // 60
+    seconds = remaining_seconds % 60
+    if format == "h:m:s":
+        return f"{hours:02d}:{minutes:02d}:{seconds:02d}"
+    elif format == "h:m":
+        return f"{hours:02d}:{minutes:02d}"
+    elif format == "m:s":
+        return f"{minutes:02d}:{seconds:02d}"
+    elif format == "h":
+        return f"{hours:02d}"
+    return ""

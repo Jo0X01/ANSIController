@@ -15,7 +15,11 @@ class _Style:
         self.code = code
     def is_style(self, mode_code: str) -> bool:
         "check if current class equal to mode_code"
-        return mode_code in self.mode_codes
+        # if isinstance(mode_code,str):
+        #     mode_code = mode_code.upper()
+        #     if mode_code.isdigit():
+        #         mode_code = int(mode_code)
+        return mode_code.upper() in self.mode_codes
     def print_style(self) -> None:
         "A function to make anything appear after calling it, so it becomes according to the mode"
         _print(self.__escape)
@@ -50,17 +54,38 @@ class _Style:
 class _Styles:
     _STYLES:list[_Style] = [_Style(info) for info in _STYLES_CODES]
     def __init__(self) -> None:
-        self._codes:list[str] = []
-        self._names:list[str] = []
+        self._scodes:list[str] = []
         for _s in self._STYLES:
-            for _c in _s.mode_codes:
-                if _c.isdigit():
-                    self._codes.append(_c)
-                else:
-                    self._names.append(_c)
-        self.pattern = rf"({'|'.join(self._names)})"
+            self._scodes.extend(_s.mode_codes)
+        self.pattern = rf"({'|'.join(self._scodes)})"
+        self._snames = []
+        self._schars = []
+        self._snums = []
+        for c in self._scodes:
+            if len(c) > 2:
+                self._snames.append(c)
+            elif c.isdigit():
+                self._snums.append(c)
+            else:
+                self._schars.append(c)
+        self._snum_re = re.compile(fr"({'|'.join(self._snums)})")
+        self._snames_re = re.compile(fr"({'|'.join(self._snames)})", re.IGNORECASE)
+        self._schars_re = re.compile(rf"({'|'.join(self._schars)})")
+    def _fix_styles(self,txt:str) -> str:
+        _num = self._snum_re.search(txt)
+        if _num:
+            _num = str(_num.group(1))
+            for _style_ in self._STYLES:
+                if _style_.is_style(_num):
+                    txt = txt.replace(_num,_style_.mode_name)
+                    break
+        _re = self._snames_re.search(txt)
+        if _re:
+            _re = _re.group(1)
+            txt = txt.replace(_re,_re[0].upper())
+        return txt
     def _extract_style(self,text:str) -> tuple:
-        p = re.compile(self.pattern)
+        p = self._schars_re
         char = p.search(text)
         if char:
             char = char.group(1)
@@ -69,6 +94,8 @@ class _Styles:
             char = "0"
         return (text,self._get_style_code_by_char(char))
     def _get_style_code_by_char(self,char:str) -> str | None:
+        if isinstance(char,str):
+            char = char.upper()
         for s in self._STYLES:
             if s.is_style(char):
                 return s.code

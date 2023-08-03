@@ -1,4 +1,5 @@
 import os
+from ANSIController.tparser import _PARSER
 from ANSIController.const import (
     _1ATTR, _256_BG, _256_FG,
     _2ATTR, _3ATTR, _DEFAULT,
@@ -6,7 +7,6 @@ from ANSIController.const import (
     _RGB_FG, _convert_hex_colors,
     _print,re
 )
-from ANSIController.tparser import _PARSER
 
 
 class _CursorControls:
@@ -103,7 +103,7 @@ class _ColorsControls:
             return ""
         if style == 0 and colors == 0:
             return _RESET
-        if isinstance(colors[1],bool):
+        if isinstance(colors[1],bool): # for id color
             r = ""
             if style:
                 r += _1ATTR.format(s=style)
@@ -137,18 +137,29 @@ class _ColorsControls:
                 data.append(text)
         return data
     def __swap(self,text:str,texts) -> str:
+        text,texts = _PARSER._fix_style_colors(text,texts)
         texts = self.__replace(texts)
         for t in texts:
             if isinstance(t,tuple):
-                text = text.replace(t[0],self.__get_colors_escape(t[1],t[2]),1)
+                text = text.replace(t[0],_RESET+self.__get_colors_escape(t[1],t[2]),1)
         return text
-
+    def __fix_skip(self,text:str,_found:list[str]) -> tuple[str,list[str]]:
+        _manual_replacment:list[str] = []
+        for r in _found:
+            if '/' in r:
+                _found.remove(r)
+                _manual_replacment.append(r)
+        for m in _manual_replacment:
+            text = text.replace(m,m.replace('/',''))
+        return (text,_found)
     def colorize(self,text:str,sep:str="[]") -> str:
         """
         ##### @text: text u want to colorize in terminal
         ##### @sep: set special code of colors styles `[]` `!$` `{}` `()` `$$` `??` `}{` and so on
         - ##### if terminal not support colorize the string will just remove from string
         - ### Note: Add This values to string to colorize the output
+        - #### Escape------: add char `\\`
+            - to escape convertering `{sep}\\ur text\\{sep}` this will print as it is
         - #### ID----------: `<{id}>` -> <255> , <15> from 0 to 255
         - #### RGB---------: `(red_value,green_value,blue_value)` from 0 to 255
         - #### RGB---------: `#FFFFFF` using hex
@@ -211,13 +222,7 @@ class _ColorsControls:
         text = _convert_hex_colors(text)
         _re = fr"{fsep}[^{fsep}{esep}].*?{esep}"
         _found = re.compile(rf"({_re})").findall(text)
-        _manual_replacment = []
-        for r in _found:
-            if '/' in r:
-                _found.remove(r)
-                _manual_replacment.append(r)
-        for m in _manual_replacment:
-            text = text.replace(m,m.replace('/',''))
+        text,_found = self.__fix_skip(text,_found)
         return self.__swap(text,_found)
     def print_colorize(self,text:str,sep:str="[]") -> None:
         _print(self.colorize(text,sep))

@@ -207,19 +207,20 @@ ________________
 #!/data/data/com.termux/files/usr/bin/env python3
 from time import sleep
 import keyboard
+from ANSIController.tprogress import _ProgressManage
 from ANSIController.controls import (
     _ColorsControls, _CursorControls,
     _print,_RESET,_1ATTR,_256_BG,
     _256_FG,_PARSER
 )
-from ANSIController.tprogress import _ProgressManage
 
 class Terminal(_CursorControls,_ColorsControls,_ProgressManage):
     __colors = _PARSER._COLORS
     __styles = _PARSER._STYLES
     def __init__(self) -> None:
-        super().__init__()
-
+        super(_CursorControls,self).__init__()
+        super(_ColorsControls,self).__init__()
+        super(_ProgressManage,self).__init__()
     def get_color(self,char:str,style:int=0,bg:bool=False) -> str:
         return _PARSER.get_color(char,style,bg)
     def get_reset(self) -> str:
@@ -233,7 +234,7 @@ class Terminal(_CursorControls,_ColorsControls,_ProgressManage):
     def print_progress(self):
         txts = self._get_ptexts()
         self.print_multi_colorize(txts)
-        self.force_move_to_up(len(txts),self.is_progress_finish())
+        self.force_move_to_up(len(txts),self.is_progress_finish(all=True))
 
     @staticmethod
     def game(row:int=40,col:int=40,move_steps:int=1):
