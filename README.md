@@ -23,7 +23,8 @@
 ```
 # ANSI Controller
 > Basic Python Script to control cursor postion in terminal
-> and colorize any text in terminal , and add any style to graphic mode in terminal
+> and colorize any text in terminal , add any style to graphic mode in terminal
+
 <div style="
     color: white;
     background-color: #8B0000;
@@ -37,6 +38,10 @@
 if u face any issue write it
 </div>
 <br>
+
+# Note:
+> #### The Goal of writing this script is to make it easier to control the terminal by simply writing the name of the color or the name of the style of the text or moving the cursor by calling a function or deleting the text in the window, use it to learn how much it will make it easier for you if you are always using the command window
+
 
 [![PyPi](https://img.shields.io/badge/-PyPi-blue.svg?logo=pypi&labelColor=555555&style=for-the-badge)](https://pypi.org/project/ANSIController "PyPi") [![License: license](https://img.shields.io/badge/-license-blue.svg?style=for-the-badge)](LICENSE "License")
 
@@ -75,11 +80,13 @@ pip3 install ANSIController
 # Table of colors & style
 - #### if terminal not support colorize the string will just remove from string
 - ### Note: Add Custom Values, to string to colorize the output
-- #### ID----------: `<{id}>`  from 0 to 255 , `<255>` , `<15>`
-- #### RGB---------: `(red_value,green_value,blue_value)` from 0 to 255  , `(213,201,250)`
-- #### RGB---------: `#FFFFFF` using hex , `#4affa1`
-- #### Background--: `X,x`
-- #### Reset-------: `Z,0,reset,Reset`
+> - ### [ID Colors](https://robotmoon.com/256-colors/): `<{id}>`  from 0 to 255 , `<255>` , `<15>`
+
+> - ### [RGB Colors](https://www.rapidtables.com/web/color/RGB_Color.html): `(red_value,green_value,blue_value)` from 0 to 255  , `(213,201,250)`
+> - ### [Hex RGB](https://www.rapidtables.com/web/color/RGB_Color.html): `#FFFFFF` using hex , `#4affa1`
+
+- #### Background: `X,x`
+- #### Reset: `Z,0,reset,Reset`
 - #### Colors:
     - [+] `black:`              `b,black,30`
     - [+] `red:`                `r,red,31`
@@ -113,11 +120,19 @@ pip3 install ANSIController
     - [+] `p:`                  `percent progress value`
     - [+] `b:`                  `bar progress value`
     - [+] `f:`                  `print full bar with all info`
-    - [+] `your_custom_key:`    `your_custom_value`
+    - [+] `e:` `Elapsed Time`
+    - [+] `r:` `Remaining Time`
+    - [+] `s:` `Speed`
+    - [+]  `your_custom_key:`    `your_custom_value`
 - #### More Control in ProgressBar:
     - [+] `txt:`                `key of string value inside`
     - [+] `mx:`                 `max value default is 100`
     - [+] `inc:`                `increamnt value defualt is 1`
+    - [+] `bopen:` `bar open char default '|'`
+    - [+] `bfill:` `bar filled char default '█'`
+    - [+] `bafill:` `bar after filled char default ''`
+    - [+] `bempty:` `bar empty char default ' '`
+    - [+] `bclose:` `bar close char default ' '`
     - [+] `custom:`             `dict object with custom keys`
 ## Examples & Usage
 ____________
@@ -334,6 +349,17 @@ terminal_control.add_progress({
             "key2":"test",
             "status_test":"Good"
         }
+    },
+    'progress_key1'|progress_key_integar:{
+        'txt':string...,
+        'mx':100,
+        'inc':1,
+        'custom':{},
+        'bopen':'|',
+        'bfill':'█',
+        'bafill':'',
+        'bempty':' '
+        'bclose':'|',
     }
 })
 
@@ -405,6 +431,23 @@ ________________
 ### `if u face any issue dont be shy , say it`
 ## License
 
-**MIT**
+**MIT License**
 **Copyright (c) 2023 [JoOx01]**
+
+`Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.`
+
 
