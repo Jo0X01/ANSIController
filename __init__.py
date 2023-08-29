@@ -213,8 +213,8 @@ from ANSIController.controls import (
     _print,_RESET,_1ATTR,_256_BG,
     _256_FG,_PARSER
 )
-
-class Terminal(_CursorControls,_ColorsControls,_ProgressManage):
+from ANSIController.const import _FastColors
+class Terminal(_CursorControls,_ColorsControls,_ProgressManage,_FastColors):
     __colors = _PARSER._COLORS
     __styles = _PARSER._STYLES
     def __init__(self) -> None:
@@ -231,11 +231,14 @@ class Terminal(_CursorControls,_ColorsControls,_ProgressManage):
         for t in text:
             self.clear_line()
             self.print_colorize(t+'\n') 
-    def print_progress(self):
+    def print_progress(self,leave_end:bool=False):
         txts = self._get_ptexts()
         self.print_multi_colorize(txts)
-        self.force_move_to_up(len(txts),self.is_progress_finish(all=True))
-
+        if not leave_end:
+            self.force_move_to_up(
+                len(txts),
+                self.is_progress_finish(all=True)
+            )
     @staticmethod
     def game(row:int=40,col:int=40,move_steps:int=1):
         control = Terminal()
@@ -304,3 +307,4 @@ class Terminal(_CursorControls,_ColorsControls,_ProgressManage):
         Terminal.print_colors()
         Terminal.print_id_colors()
         Terminal.print_colors_styles()
+

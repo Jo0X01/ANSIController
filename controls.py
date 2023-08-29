@@ -225,4 +225,4 @@ class _ColorsControls:
         text,_found = self.__fix_skip(text,_found)
         return self.__swap(text,_found)
     def print_colorize(self,text:str,sep:str="[]") -> None:
-        _print(self.colorize(text,sep))
+        _print(self.colorize("[d]"+text+"[d]",sep))
