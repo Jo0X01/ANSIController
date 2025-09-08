@@ -2,7 +2,7 @@
 
 # ANSI Controller
 
-![PyPi](https://img.shields.io/badge/-PyPi-blue.svg?logo=pypi&labelColor=555555&style=for-the-badge)
+![PyPi](https://img.shields.io/badge/-PyPi-blue.svg?logo=pypi&labelColor=555555&style=for-the-badge)(https://pypi.org/project/ANSIController/)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg?style=for-the-badge)](LICENSE)
 
 An Python module to control cursor movement, apply colors, and style text in the terminal using ANSI escape codes.
