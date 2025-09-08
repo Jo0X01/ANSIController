@@ -9,7 +9,7 @@ This documentation is intended for **developers who want full technical details*
 
 ## Documentation
 - **[ReadMe](README.md)**
-- **[Showcase](showcase.md)** – Extended screenshots, demos, and visual examples.
+- **[Showcase](SHOWCASE.md)** – Extended screenshots, demos, and visual examples.
 
 
 ---

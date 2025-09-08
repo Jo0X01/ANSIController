@@ -1,3 +1,4 @@
+
 """
 # ANSI Controller
 Basic Python Script to control cursor postion in terminal
@@ -306,5 +307,4 @@ class Terminal(_ProgressManage,_CursorControls,_ColorsControls,_FastColors):
         Terminal.print_colors()
         Terminal.print_id_colors()
         Terminal.print_colors_styles()
-
 

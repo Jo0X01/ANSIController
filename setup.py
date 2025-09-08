@@ -2,7 +2,7 @@ from setuptools import setup
 
 __author__ = "JoOx01"
 __pkg_name__ = "ANSIController"
-__version__ = "1.1.1"
+__version__ = "1.1.2"
 __desc__ = """Basic Python Module to control & color & style text in terminal"""
 
 with open('README.md', 'r', encoding='utf-8') as f:
@@ -33,7 +33,10 @@ setup(
     install_requires=['keyboard'],
     entry_points={
         'console_scripts': [
-            'ansicontroller = ANSIController.__main__:main'
+            'ansicontroller = ANSIController.__main__:main',
+            'ANSIController = ANSIController.__main__:main',
+            'ANSI = ANSIController.__main__:main',
+            'ansic = ANSIController.__main__:main',
         ]
     },
     classifiers=[
